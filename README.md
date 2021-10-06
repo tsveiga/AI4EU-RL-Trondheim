@@ -207,3 +207,11 @@ by running:
 ```console
 python ./orchestrator/orchestrator.py 
 ```
+
+## Running only the simulator
+One client is provided if one wants to run the simulator alone, with no acting. You may find it in the `simulator-client` folder
+
+`cd simulator-client & ./populate_and_rebuild_protobuf.sh`
+`python simulator-client.py`
+
+Currently it works as a simlpe example to illustrate the concept, therefore only prints in the shell the received output from the simulator gRPC message. One may use it as a template to save the data in any prefered format.
