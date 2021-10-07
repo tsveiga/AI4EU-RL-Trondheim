@@ -1,8 +1,6 @@
 //Define the used version of proto
 syntax = "proto3";
 
-package agent;
-
 message StepRequest {
   int32 numSteps = 1;
   map<string, bool> cell_state = 2;

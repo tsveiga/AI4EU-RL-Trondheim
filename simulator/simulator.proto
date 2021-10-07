@@ -1,8 +1,6 @@
 //Define the used version of proto
 syntax = "proto3";
 
-package simulation;
-
 message InitRequest {
     string StartDate      = 1 ;
     string EndDate        = 2 ;

@@ -5,6 +5,12 @@ import time
 import simulator_pb2
 import simulator_pb2_grpc
 
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+# Just as an example, define here a cell of interest. The script will track its history during the episode and plot it in the end
+cell_to_plot = 'poly_162'
 
 def main():
     sim_channel = grpc.insecure_channel("localhost:50055", options=[
@@ -33,18 +39,23 @@ def main():
     for key, value in emissions.items():
         stepMsg.cell_state[key] = 1
 
+    cell_history = []
+
     while not emissionsState.hasEnded:
         try:
-            
+
             emissionsState = sim_request_stub.step(stepMsg)
 
-            print(emissionsState.emissions)
-
+            cell_history.append(emissionsState.emissions[cell_to_plot])
         #
         except Exception as e:
             print("Got an exception ", str(e))
             # do not spam
             time.sleep(2)
 
+    # In the end we can plot the pollution history for the cell of interest
+    plt.plot(cell_history)
+    plt.title('Results for cell' + cell_to_plot)
+    plt.show()
 
 main()
